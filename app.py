@@ -10,7 +10,11 @@ app = Flask(__name__)
 
 
 # Database Setup
-file = "C:/Users/May 2018/Desktop/SMU Bootcamp Doc/01-Homework_Files/NFL-QB-Analytics/Assets/Data_Files/Cleaned_QB_data.csv"
+cwd = os.getcwd()
+f = "Assets\\Data_Files"
+file = "Cleaned_QB_data.csv"
+path = os.path.join(cwd, f, file)
+
 
 # Home route
 @app.route("/")
@@ -18,12 +22,12 @@ def index():
     """Return the homepage."""
     return render_template("index.html")
 
-# Data route
+# All-Data route
 @app.route("/all-data")
 def names():
 
-    # Use Pandas to perform the sql query
-    df = pd.read_csv(file)
+    # Use Pandas to read in data
+    df = pd.read_csv(path)
 
     # Return a list of the data
     data = {
