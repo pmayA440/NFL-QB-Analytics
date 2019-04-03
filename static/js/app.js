@@ -25,13 +25,13 @@ function buildCharts(name, start, end){
     //   PANEL.append("h6").text(`${key}: ${value}`);
     // });
     data.slice(1,10).map(row => {
-      PANEL.append("h6").text(`Name : ${row.Name},${row.Wins},${row['Passing Yards']}`)
+      PANEL.append("h6").text(`Name : ${row.Name},${row.Wins},${row['TD Passes']}`)
     })
 //  Build a Bar Chart with top 10 Quarterbacks with the most # of pass
   var BarData = [
     {
       x:data.slice(0,10).map(row=>row.Name),
-      y:data.slice(0,10).map(row=>row['Passing Yards']),
+      y:data.slice(0,10).map(row=>row['TD Passes']),
       // hovertext:data.Name,
       // hoverinfo: "hovertext",
       type: 'bar'
@@ -40,8 +40,6 @@ function buildCharts(name, start, end){
   ]
   
   Plotly.newPlot('barone', BarData);
-
-
 
 // Build a Bar Chart with top 10 Quarterbacks with most # of wins
 var BarWins = [
@@ -61,11 +59,11 @@ init();
 
 // //     // Build a Pie Chart
 //     // HINT: You will need to use slice() to grab the top 10 sample_values,
-//     // otu_ids, and labels (10 each).
+//     // top ten quarterbacks, and labels (10 each).
 //     var pieData = [
 //       {
-//         values: row.Name.slice(0, 10),
-//         labels: row.Wins.slice(0, 10),
+//         values: row.data.Name.slice(0, 10),
+//         labels: row.data.Wins.slice(0, 10),
 //         // hovertext: Wins.slice(0, 10),
 //         // hoverinfo: "hovertext",
 //         type: "pie"
@@ -84,10 +82,16 @@ init();
  function init() {
 //   // Grab a reference to the dropdown select element
   var selector = d3.select("#selDataset");
-
+  var selector2 = d3.select("#selYearStart");
+  var selector3 = d3.select("#selYearEnd");
 //   // Use the list of sample names to populate the select options
 
-    
+    var min = 1970;
+    var max = 2016;
+    for(let i = min; i <= max; i++){
+      selector2.append("option").text(i).property("value", i);
+      selector3.append("option").text(i).property("value", i);
+    }
     nfl.forEach((data2) => {
       console.log(data2)
       selector
@@ -97,17 +101,17 @@ init();
     });
 
 // Use the first sample from the list to build the initial plots
-    const firstSample = nfl[0];
-    buildCharts(firstSample);
-    buildMetadata(firstSample);
   }
 
-// function optionChanged(newSample) {
+// function optionChanged("bill", start, stop) {
 //   // Fetch new data each time a new sample is selected
 //   buildCharts(newSample);
-//   buildMetadata(newSample);
 //  }
-
+function getNewData() {
+  const  start = document.getElementById("selYearStart").value;
+  const  end = document.getElementById("selYearEnd").value;
+  buildCharts("bill", start, end)
+}
 // Initialize the dashboard
 buildCharts(
   'bill',2006,2016

@@ -19,15 +19,20 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-2">
+      <div class="col-md-12">
         <div class="well">
           <h5>SELECT Name:</h5>
           <select id="selDataset" onchange="optionChanged(this.value)"></select>
         </div>
         <div class="well">
           <h5>SELECT Year:</h5>
-          <select id="selDataset" onchange="optionChanged(this.Year)"></select>
+          <select id="selYearStart"></select>
         </div>
+        <div class="well">
+          <h5>SELECT Year:</h5>
+          <select id="selYearEnd"></select>
+        </div>
+        <button onclick="getNewData()">Click</button>
         <div class="panel panel-primary">
           <div class="panel-heading">
             <h3 class="panel-title">Sample MetaData</h3>

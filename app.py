@@ -31,9 +31,9 @@ def names(start,end):
     # Use Pandas to read in data
     df = pd.read_csv(path)
     defOne= df[(df.Year >=int(start)) & (df.Year <= int(end))]
-    defOne = defOne[["Year",'Name','Passing Yards','TD Passes','Wins']].groupby(['Name']).agg(np.sum)
+    defOne = defOne[['Name','Passing Yards','TD Passes','Wins']].groupby(['Name']).agg(np.sum)
     defOne.reset_index(inplace = True)
-    defOne.sort_values('Wins',ascending=False,inplace = True)
+    defOne.sort_values('Wins',ascending =False,inplace = True)
     
 
     # Return a list of the data
