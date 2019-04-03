@@ -1,9 +1,10 @@
-
- 
- d3.json(`/all-data/2006/2016`).then((data) => {
+var nfl = [];
+function buildCharts(name, start, end){
+ d3.json(`/all-data/${start}/${end}`).then((data) => {
     // Use d3 to select the panel with id of `#all_data`
     var PANEL = d3.select("#all-data");
     console.log(data)
+    nfl = data;
     // Use `.html("") to clear any existing metadata
    PANEL.html("");
   // d3.csv("/all-data", function (error, data) {
@@ -29,27 +30,44 @@
 //  Build a Bar Chart with top 10 Quarterbacks with the most # of pass
   var BarData = [
     {
-      x:data.slice(1,10).map(row=>row.Name),
-      y:data.slice(1,10).map(row=>row['Passing Yards']),
+      x:data.slice(0,10).map(row=>row.Name),
+      y:data.slice(0,10).map(row=>row['Passing Yards']),
       // hovertext:data.Name,
       // hoverinfo: "hovertext",
       type: 'bar'
     }
-  ];
   
-  Plotly.newPlot('bar', BarData);
-  })
+  ]
+  
+  Plotly.newPlot('barone', BarData);
 
+
+
+// Build a Bar Chart with top 10 Quarterbacks with most # of wins
+var BarWins = [
+  {
+    x:data.slice(0,10).map(row=>row.Name),
+    y:data.slice(0,10).map(row=>row['Wins']),
+    // hovertext:data.Name,
+    // hoverinfo: "hovertext",
+    type: 'bar'
+  }
+];
+
+Plotly.newPlot('bartwo', BarWins);
+init();
+})
+}
 
 // //     // Build a Pie Chart
 //     // HINT: You will need to use slice() to grab the top 10 sample_values,
 //     // otu_ids, and labels (10 each).
 //     var pieData = [
 //       {
-//         values: sample_values.slice(0, 10),
-//         labels: otu_ids.slice(0, 10),
-//         hovertext: otu_labels.slice(0, 10),
-//         hoverinfo: "hovertext",
+//         values: row.Name.slice(0, 10),
+//         labels: row.Wins.slice(0, 10),
+//         // hovertext: Wins.slice(0, 10),
+//         // hoverinfo: "hovertext",
 //         type: "pie"
 //       }
 //     ];
@@ -63,62 +81,34 @@
 // }
 
 
-
-// // function buildCharts(data) {
-// //   d3.json(`/samples/${sample}`).then((data) => {
-// //     const otu_ids = data.otu_ids;
-// //     const otu_labels = data.otu_labels;
-// //     const sample_values = data.sample_values;
-
-//     // Build a Bubble Chart
-//     var bubbleLayout = {
-//       margin: { t: 0 },
-//       hovermode: "closest",
-//       xaxis: { title: "OTU ID" }
-//     };
-//     var bubbleData = [
-//       {
-//         x: otu_ids,
-//         y: sample_values,
-//         text: otu_labels,
-//         mode: "markers",
-//         marker: {
-//           size: sample_values,
-//           color: otu_ids,
-//           colorscale: "Earth"
-//         }
-//       }
-//     ];
-
-//     Plotly.plot("bubble", bubbleData, bubbleLayout);
-
-
-
  function init() {
 //   // Grab a reference to the dropdown select element
-//   var selector = d3.select("#selDataset");
+  var selector = d3.select("#selDataset");
 
 //   // Use the list of sample names to populate the select options
-//   d3.json("/names").then((data) => {
-//     data.forEach((data) => {
-//       selector
-//         .append("option")
-//         .text(data)
-//         .property("value", data);
-//     });
 
-//     // Use the first sample from the list to build the initial plots
-//     const firstSample = data[0];
-//     buildCharts(firstSample);
-//     buildMetadata(firstSample);
-//   });
-// }
+    
+    nfl.forEach((data2) => {
+      console.log(data2)
+      selector
+        .append("option")
+        .text(data2.Name)
+        .property("value", data2);
+    });
+
+// Use the first sample from the list to build the initial plots
+    const firstSample = nfl[0];
+    buildCharts(firstSample);
+    buildMetadata(firstSample);
+  }
 
 // function optionChanged(newSample) {
 //   // Fetch new data each time a new sample is selected
 //   buildCharts(newSample);
 //   buildMetadata(newSample);
- }
+//  }
 
 // Initialize the dashboard
-init();
+buildCharts(
+  'bill',2006,2016
+)
