@@ -29,16 +29,6 @@ def years():
     # Return a list of the column names (sample names)
     return jsonify(scrubbed_list)
 
-@app.route("/names")
-def names():
-    """Return a list of names."""
-
-    df = pd.read_csv(file)
-    name_list = list((df.Name))
-    scrubbed_list = list(dict.fromkeys(name_list))
-    # Return a list of the column names (sample names)
-    return jsonify(scrubbed_list)
-
 
 @app.route("/metadata/<year>")
 def sample_metadata(year):
@@ -59,21 +49,41 @@ def sample_metadata(year):
     return jsonify(data)
 
 
-@app.route("/metadata/<name>")
-def sample_metadata_name(name):
-    """Return the MetaData for a given name."""
+@app.route("/wins/<start>/<end>")
+def wins(start,end):
+
+    # Use Pandas to read in data
     df = pd.read_csv(file)
-
-    results = df.loc[df['Name'] == (name)]
-
-    # Create a dictionary entry for each row of metadata information
+    defOne= df[(df.Year >=int(start)) & (df.Year <= int(end))]
+    defOne = defOne.groupby(['Name']).agg(np.sum)
+    defOne.reset_index(inplace = True)
+    defOne.sort_values('Wins',ascending=False,inplace = True)
+    
     data = {
-        'Name': results['Name'].values.tolist(),
-        'Year': results['Year'].values.tolist(),
-        'Season': results['Season'].values.tolist(),
-        'Wins': results['Wins'].values.tolist(),
-        'Passing_Yards': results['Passing Yards'].values.tolist(),
-        'TD_Passes': results['TD Passes'].values.tolist(),
+        'Name': defOne['Name'].values.tolist(),
+        'Wins': defOne['Wins'].values.tolist(),
+        'Passing_Yards': defOne['Passing Yards'].values.tolist(),
+        'TD_Passes': defOne['TD Passes'].values.tolist(),
+    }
+    return jsonify(data)
+
+@app.route("/td_passes/<start>/<end>")
+def passes(start,end):
+
+    # Use Pandas to read in data
+    df = pd.read_csv(file)
+    defOne= df[(df.Year >=int(start)) & (df.Year <= int(end))]
+    defOne 
+    defOne.reset_index(inplace = True)
+    defOne.sort_values('TD Passes',ascending=False,inplace = True)
+    
+    data = {
+        'Name': defOne['Name'].values.tolist(),
+        'Year': defOne['Year'].values.tolist(),
+        'Season': defOne['Season'].values.tolist(),
+        'Wins': defOne['Wins'].values.tolist(),
+        'Passing_Yards': defOne['Passing Yards'].values.tolist(),
+        'TD_Passes': defOne['TD Passes'].values.tolist(),
     }
     return jsonify(data)
 
