@@ -20,13 +20,24 @@ def index():
 
 
 @app.route("/years")
-def names():
+def years():
     """Return a list of years."""
 
     df = pd.read_csv(file)
-
+    year_list = list((df.Year))
+    scrubbed_list = list(dict.fromkeys(year_list))
     # Return a list of the column names (sample names)
-    return jsonify(list((df.Year)))
+    return jsonify(scrubbed_list)
+
+@app.route("/names")
+def names():
+    """Return a list of names."""
+
+    df = pd.read_csv(file)
+    name_list = list((df.Name))
+    scrubbed_list = list(dict.fromkeys(name_list))
+    # Return a list of the column names (sample names)
+    return jsonify(scrubbed_list)
 
 
 @app.route("/metadata/<year>")
@@ -35,6 +46,25 @@ def sample_metadata(year):
     df = pd.read_csv(file)
 
     results = df.loc[df['Year'] == int(year)]
+
+    # Create a dictionary entry for each row of metadata information
+    data = {
+        'Name': results['Name'].values.tolist(),
+        'Year': results['Year'].values.tolist(),
+        'Season': results['Season'].values.tolist(),
+        'Wins': results['Wins'].values.tolist(),
+        'Passing_Yards': results['Passing Yards'].values.tolist(),
+        'TD_Passes': results['TD Passes'].values.tolist(),
+    }
+    return jsonify(data)
+
+
+@app.route("/metadata/<name>")
+def sample_metadata_name(name):
+    """Return the MetaData for a given name."""
+    df = pd.read_csv(file)
+
+    results = df.loc[df['Name'] == (name)]
 
     # Create a dictionary entry for each row of metadata information
     data = {
