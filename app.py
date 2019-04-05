@@ -73,14 +73,12 @@ def passes(start,end):
     # Use Pandas to read in data
     df = pd.read_csv(file)
     defOne= df[(df.Year >=int(start)) & (df.Year <= int(end))]
-    defOne 
+    defOne = defOne.groupby(['Name']).agg(np.sum)
     defOne.reset_index(inplace = True)
     defOne.sort_values('TD Passes',ascending=False,inplace = True)
     
     data = {
         'Name': defOne['Name'].values.tolist(),
-        'Year': defOne['Year'].values.tolist(),
-        'Season': defOne['Season'].values.tolist(),
         'Wins': defOne['Wins'].values.tolist(),
         'Passing_Yards': defOne['Passing Yards'].values.tolist(),
         'TD_Passes': defOne['TD Passes'].values.tolist(),

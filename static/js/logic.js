@@ -108,24 +108,57 @@ function buildtop10Win(start,end){
                     }
                 }         
             };   
-      Plotly.newPlot('gauge', BarData, layout);
+      Plotly.newPlot('wins', BarData, layout);
         
-        
-        
-        // // Build a Bar Chart with top 10 Quarterbacks with most # of wins
-        // var BarWins = [
-        //   {
-        //     x:data.slice(0,10).map(row=>row.Name),
-        //     y:data.slice(0,10).map(row=>row['Wins']),
-        //     // hovertext:data.Name,
-        //     // hoverinfo: "hovertext",
-        //     type: 'bar'
-        //   }
-        // ];
-        
-        // Plotly.newPlot('pie', BarWins);
       });
     };
+
+
+
+
+function buildtop10TDpasses(start,end){
+  var base_url= "/td_passes/";
+  var url = base_url + start + "/" + end
+  d3.json(url).then(function(response){
+      console.log(response);
+      console.log(url);
+                
+      var name_data = response.Name;
+      var td_data = response.TD_Passes;
+      var yard_data = response.Passing_Yards;
+    
+      var sliced_names = name_data.slice(0,10);
+      var sliced_td = td_data.slice(0,10);
+      var sliced_yards = yard_data.slice(0,10);
+    
+      var BarData = [
+            {
+              x:sliced_names,
+              y:sliced_td,
+              hoverinfo: sliced_yards,
+              type: 'bar'
+            }
+              
+          ]
+      var layout = {
+            title: `Highest number of TD Passes by quarterback from ${start} to ${end}`,
+            showlegend: false,
+            xaxis:{
+              title: {
+                text: "Quarterback"
+                      }      
+                  },
+            yaxis:{
+              title: {
+                text: "TD Passes"
+                    }
+                }         
+            };   
+      Plotly.newPlot('tds', BarData, layout);
+            
+      });
+    };
+
 
 function init() {
   // Grab a reference to the dropdown select element
@@ -147,16 +180,18 @@ function init() {
     buildChart(firstYear);
     buildMetadata(firstYear);
     buildtop10Win(firstYear, secondYear);
+    buildtop10TDpasses(firstYear, secondYear);
   });
 }
 
 function optionChanged(newYear) {
   // Fetch new data each time a new sample is selected
   // newYear2 will be newYear's index + 10
-  var newYear2 = 
+  var newYear2 = parseInt(newYear) + 10;
   buildChart(newYear);
   buildMetadata(newYear);
-  buildtop10Win(newYear, newYear2)
+  buildtop10Win(newYear, newYear2);
+  buildtop10TDpasses(newYear, newYear2);
 }
 
 // Initialize the dashboard
