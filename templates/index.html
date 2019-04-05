@@ -7,7 +7,7 @@
     <title>NFL QB Stats Dashboard</title>
     <!-- Latest compiled and minified CSS & JS -->
     <link rel="stylesheet" media="screen" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="..style.css">   
+    <link rel="stylesheet" href="../static/style.css">   
    
 </head>
 
@@ -15,7 +15,7 @@
  <div class="container push-spaces">
                 <div class="row">
                         <div class="col-md-12 text-center">
-                        <div class="jumbotron" style="background-image: url(../Images/football_field.png); background-size: 100% 100%;">
+                        <div class="jumbotron" style="background-image: url(../static/Images/football_field.png); background-size: 100% 100%;">
                             <h1>NFL QB Stats Dashboard</h1>
                             <p>Use the interactive charts below to explore the dataset</p>
                         </div>
@@ -34,7 +34,7 @@
   <!-- Wrapper for slides -->
   <div class="carousel-inner">
     <div class="item active">
-      <img class="center-block" src="../Images/nflcover.png" alt="NFLCover">
+      <img class="center-block" src="../static/Images/nflcover.png" alt="NFLCover">
       <div class="carousel-caption">
         <h3>Top QBs of All-time</h3>
         <p>Search For Your Favorite QB!</p>
@@ -42,7 +42,7 @@
     </div>
 
     <div class="item">
-      <img class="center-block" src="../Images/danmarino.png" alt="Dan Marino">
+      <img class="center-block" src="../static/Images/danmarino.png" alt="Dan Marino">
       <div class="carousel-caption">
         <h3>Dan Marino</h3>
         <p>Dan Marino was the first when he set an NFL record with 5,084 yards passing in 1984.</p>
@@ -50,7 +50,7 @@
     </div>
     
      <div class="item">
-      <img class="center-block" src="../Images/drewbress.png" alt="Drew Brees">
+      <img class="center-block" src="../static/Images/drewbress.png" alt="Drew Brees">
       <div class="carousel-caption">
         <h3>Drew Brees</h3>
         <p>Drew Brees has highest Pass Completion % (74.4%)</p>
@@ -58,7 +58,7 @@
     
     </div>
      <div class="item">
-      <img class="center-block" src="../Images/warrenmoon.png" alt="Warren Moon">
+      <img class="center-block" src="../static/Images/warrenmoon.png" alt="Warren Moon">
       <div class="carousel-caption">
         <h3>Warren Moon</h3>
         <p>Warren Moon, set a NFL record for most passes completed for the 1995.</p>
@@ -66,7 +66,7 @@
     
     </div>
      <div class="item">
-      <img class="center-block" src="../Images/johnnyunitas.png" alt="Johnny Unitas">
+      <img class="center-block" src="../static/Images/johnnyunitas.png" alt="Johnny Unitas">
       <div class="carousel-caption">
         <h3>Johnny Unitas</h3>
         <p>Johnny Unitas For 52 years, he held the record for most consecutive games with a touchdown pass.</p>
@@ -74,7 +74,7 @@
    
    </div>
    <div class="item">
-      <img class= "center-block" src="../Images/sammybaugh.png" alt="Sammy Baugh">
+      <img class= "center-block" src="../static/Images/sammybaugh.png" alt="Sammy Baugh">
       <div class="carousel-caption">
         <h3>Sammy Baugh</h3>
         <p>Sammy Baugh the first quarterback to play 16 seasons.</p>
@@ -95,18 +95,14 @@
     <div class="row">
       <div class="col-md-2">
         <div class="well">
-          <h5>SELECT Sample:</h5>
+          <h5>SELECT Year:</h5>
           <select id="selDataset" onchange="optionChanged(this.value)"></select>
         </div>
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <h3 class="panel-title">Sample MetaData</h3>
-          </div>
-          <div id="sample-metadata" class="panel-body"></div>
-        </div>
+
       </div>
       <div class="col-md-5">
         <div id="pie"></div>
+
       </div>
       <div class="col-md-5">
         <div id="gauge"></div>
@@ -121,8 +117,10 @@
       <div id="tds"></div>
     </div>
   </div>
+  <br>
+
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 centered" >
       <div id="bubble"></div>
     </div>
   </div>
