@@ -182,7 +182,7 @@ function init() {
     buildtop10Win(firstYear, secondYear);
     buildtop10TDpasses(firstYear, secondYear);
   });
-}
+};
 
 function optionChanged(newYear) {
   // Fetch new data each time a new sample is selected
@@ -192,7 +192,7 @@ function optionChanged(newYear) {
   buildMetadata(newYear);
   buildtop10Win(newYear, newYear2);
   buildtop10TDpasses(newYear, newYear2);
-}
+};
 
 // Initialize the dashboard
 init();

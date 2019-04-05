@@ -1,0 +1,25 @@
+    .jumbotron h1 {
+      color: #ffffff;
+      background: transparent;
+      text-align: center;
+      margin-top: 0px;
+      font-weight: 200;
+      font-size: 70px;
+
+    }
+
+    .jumbotron p {
+      color: #ffffff;
+      background-color: transparent;
+      text-align: center;
+      margin-top: 0px;
+      font-weight: 200;
+      font-size: 20px;
+
+    }
+
+    body {
+        background: rgb(43, 43, 66);
+        color: rgb(43, 43, 66);
+        font-size: 1.1em;
+    }
