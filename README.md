@@ -1,12 +1,15 @@
 
 # NFL-QB-Analytics
-Uses interactive visualizations to tell the story of NFL QBs. This project utilizes these technologies: 
+Uses interactive visualizations to tell the story of the top NFL Quarterbacks performance since 1970.
+This project utilizes these technologies: 
 Python Flask powered RESTful API.
+
+App.py/Flask
 Created routes to read csv file which was cleaned and transformed from panda/python.
 Created data frames and sorted the data in flasks.
 Created multiple routes that were used to create bubble and bar charts.
 
-JavaScript -Doris and Terresa
+JavaScript
 Used d3.json functions to read the app.py, select the panel with id(#sample data) and append the data.
 Ensured that html panel is cleared every time the used launch the website. 
 
@@ -16,7 +19,7 @@ Used init() functions to grab Name reference to the drop down menu as select ele
 
 
 
-HTML/CSS, 
-JavaScript.
+HTML/CSS
+
 
 
