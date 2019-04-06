@@ -1,4 +1,5 @@
 # NFL-QB-Analytics
+Uses interactive visualizations to tell the story of the top NFL Quarterbacks performance since 1970. This project utilizes these technologies: Python Flask powered RESTful API.
 
 App.py/Flask Created routes to read csv file which was cleaned and transformed from panda/python. Created data frames and sorted the data in flasks. Created multiple routes that were used to create bubble and bar charts.
 
